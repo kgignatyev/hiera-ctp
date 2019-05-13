@@ -6,6 +6,7 @@ extern crate base64;
 use std::io::{Read, Error};
 use std::env;
 use serde_json::{ Value};
+use base64::{encode, decode};
 
 
 
@@ -37,7 +38,7 @@ impl From<String> for CustomError {
 
 fn get_key_value(path: &String) -> Result<String, CustomError> {
 //    let mut res = reqwest::get("http://httpbin.org/get")?;
-    let url = format!("http://localhost:8500/v1/kv/{}", path);
+    let url:String = format!("http://localhost:8500/v1/kv/{}", path);
     println!("trying:{}", url);
 
     let mut res = reqwest::get(&url)?;
@@ -84,12 +85,9 @@ fn main() {
             let r:Result<Value,serde_json::Error> = serde_json::from_str(&data);
             match r {
                 Ok(v) => {
-                    let b64v = v[0]["Value"].to_string();
-                    let vd =  base64::decode( &b64v).unwrap();
-
-                    let s = String::from_raw_parts(vd).unwrap();
-
-
+                    let b64v = v[0]["Value"].as_str().unwrap();
+                    let vd =  decode( b64v).unwrap();
+                    let s = String::from_utf8(vd).unwrap();
                     println!("OK: got key - {} = {} = {}",v[0]["Key"],b64v, s);
                 },
                 Err(err) => {}
