@@ -75,7 +75,6 @@ public class HieraPlugin {
         var parts = Arrays.asList(path_parts);
         Collections.reverse(parts);
         String res = null;
-
         for (int x = 0; x < parts.size(); x++) {
             if (res == null) {
                 StringBuilder sb = new StringBuilder();
@@ -91,19 +90,16 @@ public class HieraPlugin {
             }
         }
         if (res == null) {
-//            lets try to find default
+//            lets try to find a default
             res = get_key_value_or_null("default/" + key);
-
         }
         return new Result(res, 200);
     }
 
 
     public static void main(String[] args) {
-
         var path = Arrays.copyOfRange(args, 1, args.length);
         var r = find_key_value(args[0], path);
-
         var p = String.join(",", args);
         System.out.println(r.res);
     }

@@ -9,3 +9,5 @@ consul kv put qa/us-east-2/myapp/pgdb/url "postgresql://east-myapp/db"
 consul kv put qa/us-east-2/myapp/release1/pgdb/url "postgresql://east-myapp/db-r1"
 consul kv put myapp/pgdb/url "postgresql://localhost/mydb"
 consul kv put default/myapp/release1/pgdb/url "postgresql://localhost/mydb-r1"
+consul kv put qa/mysql @mysql1.json
+consul kv put prod/mysql @mysql2.json

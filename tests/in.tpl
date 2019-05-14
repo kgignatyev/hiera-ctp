@@ -1,24 +1,22 @@
 
-got [{{ key "default/count" }}], expected <1> - direct key lookup
+got count [{{ key "default/count" }}], expected <1> - direct key lookup
+{{ $location := or (env "CLUSTER_LOCATION" ) "us-west-1" }}
+{{ $app := or (env "APP" ) "myapp"}}
+{{ $release := or (env "RELEASE" ) "release1"}}
+{{ $env := or (env "ENVIRONMENT" ) "qa"}}
 
-{{ $location := "us-west-1"}}
-{{ $app := "myapp"}}
-{{ $release := "release1"}}
-{{ $env := "qa"}}
-
-{{$location}}_{{$env}}={{plugin "hiera-ctp" "psql/url"  $location $env }}
+{{$location}}_{{$env}}={{plugin "hiera-ctp" "pgdb/url"  $location $env }}
 
 {{$app}}_{{$location}}_{{$env }}={{plugin "hiera-ctp" "pgdb/url"  $app $location $env  }}
 
 {{$release}}_{{$app}}_{{$location}}_{{$env }}={{plugin "hiera-ctp" "pgdb/url" $release $app $location $env  }}
 
-{{ $location := "us-east-2"}}
+Getting JSON value
 
-{{$release}}_{{$app}}_{{$location}}_{{$env }}={{plugin "hiera-ctp" "pgdb/url" $release $app $location $env  }}
-
-{{ $release := "release2"}}
-
-{{$release}}_{{$app}}_{{$location}}_{{$env }}={{plugin "hiera-ctp" "pgdb/url" $release $app $location $env  }}
+{{with $d := plugin "hiera-ctp" "mysql" $release $app $location $env | parseJSON }}
+url = {{$d.url}}
+user = {{$d.user}}
+{{end}}
 
 
 

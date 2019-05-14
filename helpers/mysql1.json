@@ -1,0 +1,4 @@
+{
+  "url": "jdbc:mysql://mysql1:3306/users",
+  "user": "user1"
+}
