@@ -5,10 +5,8 @@ extern crate base64;
 
 use std::io::{Read, Error};
 use std::env;
-use serde_json::{ Value};
-use base64::{encode, decode};
-
-
+use serde_json::Value;
+use base64::{decode};
 
 
 enum CustomError {
@@ -37,26 +35,30 @@ impl From<String> for CustomError {
 
 
 fn get_key_value(path: &String) -> Result<String, CustomError> {
-//    let mut res = reqwest::get("http://httpbin.org/get")?;
-    let url:String = format!("http://localhost:8500/v1/kv/{}", path);
-    println!("trying:{}", url);
+    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
+//    println!("trying:{}", url);
 
     let mut res = reqwest::get(&url)?;
     let mut body = String::new();
     res.read_to_string(&mut body)?;
-
-    println!("Status: {}", res.status());
-    println!("Headers:\n{:#?}", res.headers());
-    println!("Body:\n{}", body);
     if res.status() == 200 {
-        Ok(body)
+        let r: Result<Value, serde_json::Error> = serde_json::from_str(&body);
+        match r {
+            Ok(v) => {
+                let b64v = v[0]["Value"].as_str().unwrap();
+                let vd = decode(b64v).unwrap();
+                let s = String::from_utf8(vd).unwrap();
+                Ok(s)
+            }
+            Err(_) => Err(CustomError::Info("no value".to_string()))
+        }
     } else {
         Err(CustomError::Info("no value".to_string()))
     }
 }
 
 
-fn find_key_value(key: &String, path_parts: &[String])->Option<String> {
+fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
     let mut parts = path_parts.to_vec();
     parts.reverse();
     let mut res: Option<String> = None;
@@ -67,8 +69,10 @@ fn find_key_value(key: &String, path_parts: &[String])->Option<String> {
             let path = format!("{}/{}", head.join("/"), key);
             let r = get_key_value(&path);
             match r {
-                Ok(x) => {println!("OK: got - {}", x);res = Some(x);},
-                Err(_) => println!("Error")
+                Ok(x) => {
+                    res = Some(x)
+                }
+                Err(_e) => {}
             }
         }
     }
@@ -79,25 +83,24 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let (left, path_parts) = args.split_at(2);
     let key = left.get(1).unwrap();
-    let res = find_key_value(&key, &path_parts);
+    let mut res = find_key_value(&key, &path_parts);
     match res {
         Some(data) => {
-            let r:Result<Value,serde_json::Error> = serde_json::from_str(&data);
-            match r {
-                Ok(v) => {
-                    let b64v = v[0]["Value"].as_str().unwrap();
-                    let vd =  decode( b64v).unwrap();
-                    let s = String::from_utf8(vd).unwrap();
-                    println!("OK: got key - {} = {} = {}",v[0]["Key"],b64v, s);
-                },
-                Err(err) => {}
+            res = Some(data);
+        }
+        None => {
+            let default_path = format!("default/{}",key );
+            let default_res = get_key_value(&default_path);
+            res = match default_res {
+                Ok( s) =>  Some(s),
+                Err(_)=> None
             }
-        },
-        None =>{
-
         }
     }
 
-    println!("{:?}", args);
-//    run();
+    match res {
+        Some(v)=> println!("{}",  v),
+        None=>println!("null")
+    }
+    
 }
