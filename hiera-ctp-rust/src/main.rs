@@ -2,37 +2,13 @@ extern crate reqwest;
 extern crate serde_json;
 extern crate base64;
 
+mod err;
 
-use std::io::{Read, Error};
+use std::io::Read;
 use std::env;
 use serde_json::Value;
-use base64::{decode};
-
-
-enum CustomError {
-    Io(std::io::Error),
-    Reqwest(reqwest::Error),
-    Info(String),
-}
-
-impl From<std::io::Error> for CustomError {
-    fn from(err: std::io::Error) -> CustomError {
-        CustomError::Io(err)
-    }
-}
-
-impl From<reqwest::Error> for CustomError {
-    fn from(err: reqwest::Error) -> CustomError {
-        CustomError::Reqwest(err)
-    }
-}
-
-impl From<String> for CustomError {
-    fn from(err: String) -> CustomError {
-        CustomError::Info(err)
-    }
-}
-
+use base64::decode;
+use err::CustomError;
 
 fn get_key_value(path: &String) -> Result<String, CustomError> {
     let url: String = format!("http://localhost:8500/v1/kv/{}", path);
