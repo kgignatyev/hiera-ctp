@@ -10,4 +10,9 @@ cd ../hiera-ctp-java
 
 ./build.sh
 
+cd ../hiera-ctp-go
+
+./build.sh
+
+
 cd ..

@@ -10,9 +10,17 @@ function runTemplates() {
   export PATH=$HOME/.cargo/bin:$PATH
   echo "Running $(which hiera-ctp)"
   time consul-template --vault-renew-token=false --once -template  "tests/in.tpl:tests/target/out-rust-$SUFFIX.txt"
+  export PATH=$HOME/go/bin:$PATH
+  echo "Running $(which hiera-ctp)"
+  time consul-template --vault-renew-token=false --once -template  "tests/in.tpl:tests/target/out-go-$SUFFIX.txt"
+  
   diff_result=$(diff tests/target/out-java-$SUFFIX.txt tests/target/out-rust-$SUFFIX.txt)
   if [[ 0 -eq ${diff_result} ]]; then
     echo "congratulations, rendered templates are the same"
+  fi
+  diff_result=$(diff tests/target/out-go-$SUFFIX.txt tests/target/out-rust-$SUFFIX.txt)
+  if [[ 0 -eq ${diff_result} ]]; then
+	 echo "congratulations, rendered go templates are the same"
   fi
 }
 
