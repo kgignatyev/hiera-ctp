@@ -1,25 +1,25 @@
 
 
-pub enum CustomError {
+pub enum CTPError {
     Io(std::io::Error),
     Reqwest(reqwest::Error),
     Info(String),
 }
 
-impl From<std::io::Error> for CustomError {
-    fn from(err: std::io::Error) -> CustomError {
-        CustomError::Io(err)
+impl From<std::io::Error> for CTPError {
+    fn from(err: std::io::Error) -> CTPError {
+        CTPError::Io(err)
     }
 }
 
-impl From<reqwest::Error> for CustomError {
-    fn from(err: reqwest::Error) -> CustomError {
-        CustomError::Reqwest(err)
+impl From<reqwest::Error> for CTPError {
+    fn from(err: reqwest::Error) -> CTPError {
+        CTPError::Reqwest(err)
     }
 }
 
-impl From<String> for CustomError {
-    fn from(err: String) -> CustomError {
-        CustomError::Info(err)
+impl From<String> for CTPError {
+    fn from(err: String) -> CTPError {
+        CTPError::Info(err)
     }
 }

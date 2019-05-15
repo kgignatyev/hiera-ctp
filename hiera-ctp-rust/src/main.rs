@@ -8,12 +8,10 @@ use std::io::Read;
 use std::env;
 use serde_json::Value;
 use base64::decode;
-use err::CustomError;
+use err::CTPError;
 
-fn get_key_value(path: &String) -> Result<String, CustomError> {
+fn get_key_value(path: &String) -> Result<String, CTPError> {
     let url: String = format!("http://localhost:8500/v1/kv/{}", path);
-//    println!("trying:{}", url);
-
     let mut res = reqwest::get(&url)?;
     let mut body = String::new();
     res.read_to_string(&mut body)?;
@@ -26,10 +24,10 @@ fn get_key_value(path: &String) -> Result<String, CustomError> {
                 let s = String::from_utf8(vd).unwrap();
                 Ok(s)
             }
-            Err(_) => Err(CustomError::Info("no value".to_string()))
+            Err(_) => Err(CTPError::Info("no value".to_string()))
         }
     } else {
-        Err(CustomError::Info("no value".to_string()))
+        Err(CTPError::Info("no value".to_string()))
     }
 }
 
@@ -59,24 +57,18 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let (left, path_parts) = args.split_at(2);
     let key = left.get(1).unwrap();
-    let mut res = find_key_value(&key, &path_parts);
+    let res = find_key_value(&key, &path_parts);
     match res {
         Some(data) => {
-            res = Some(data);
+            println!("{}",  data)
         }
         None => {
             let default_path = format!("default/{}",key );
             let default_res = get_key_value(&default_path);
-            res = match default_res {
-                Ok( s) =>  Some(s),
-                Err(_)=> None
+            match default_res {
+                Ok( s) =>  println!("{}",  s),
+                Err(_)=> println!("null")
             }
         }
     }
-
-    match res {
-        Some(v)=> println!("{}",  v),
-        None=>println!("null")
-    }
-    
 }
