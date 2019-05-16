@@ -11,11 +11,13 @@ use base64::decode;
 use err::CTPError;
 
 fn get_key_value(path: &String) -> Result<String, CTPError> {
-    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
+//    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
+    let mut url: String = "http://localhost:8500/v1/kv/".to_owned();
+    url.push_str( path);
     let mut res = reqwest::get(&url)?;
-    let mut body = String::new();
-    res.read_to_string(&mut body)?;
     if res.status() == 200 {
+        let mut body = String::new();
+        res.read_to_string(&mut body)?;
         let r: Result<Value, serde_json::Error> = serde_json::from_str(&body);
         match r {
             Ok(v) => {
@@ -40,7 +42,7 @@ fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
     for x in 0..length {
         if res.is_none() {
             let (head, _tail) = parts.split_at(length - x);
-            let path = format!("{}/{}", head.join("/"), key);
+            let  path = format!("{}/{}", head.join("/"), key);
             let r = get_key_value(&path);
             match r {
                 Ok(x) => {
