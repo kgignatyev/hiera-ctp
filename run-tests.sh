@@ -35,3 +35,7 @@ export RELEASE=release2
 runTemplates
 export ENVIRONMENT=prod
 runTemplates
+
+ls -alh hiera-ctp-java/target/hiera-ctp
+ls -alh $HOME/.cargo/bin/hiera-ctp
+ls -alh $HOME/go/bin/hiera-ctp

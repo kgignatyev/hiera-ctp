@@ -9,12 +9,16 @@ use std::env;
 use serde_json::Value;
 use base64::decode;
 use err::CTPError;
+use reqwest::Client;
 
-fn get_key_value(path: &String) -> Result<String, CTPError> {
+
+fn get_key_value(path: &String, http_client: &Client) -> Result<String, CTPError> {
 //    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
     let mut url: String = "http://localhost:8500/v1/kv/".to_owned();
-    url.push_str( path);
-    let mut res = reqwest::get(&url)?;
+    url.push_str(path);
+//    let mut res = reqwest::get(&url)?;
+
+    let mut res = http_client.get(&url).send()?;
     if res.status() == 200 {
         let mut body = String::new();
         res.read_to_string(&mut body)?;
@@ -34,7 +38,7 @@ fn get_key_value(path: &String) -> Result<String, CTPError> {
 }
 
 
-fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
+fn find_key_value(key: &String, path_parts: &[String], http_client: &Client) -> Option<String> {
     let mut parts = path_parts.to_vec();
     parts.reverse();
     let mut res: Option<String> = None;
@@ -42,8 +46,8 @@ fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
     for x in 0..length {
         if res.is_none() {
             let (head, _tail) = parts.split_at(length - x);
-            let  path = format!("{}/{}", head.join("/"), key);
-            let r = get_key_value(&path);
+            let path = format!("{}/{}", head.join("/"), key);
+            let r = get_key_value(&path, http_client);
             match r {
                 Ok(x) => {
                     res = Some(x)
@@ -56,20 +60,21 @@ fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
 }
 
 fn main() {
+    let http_client: Client = Client::builder().build().expect("expect client");
     let args: Vec<String> = env::args().collect();
     let (left, path_parts) = args.split_at(2);
     let key = left.get(1).unwrap();
-    let res = find_key_value(&key, &path_parts);
+    let res = find_key_value(&key, &path_parts, &http_client);
     match res {
         Some(data) => {
-            println!("{}",  data)
+            println!("{}", data)
         }
         None => {
-            let default_path = format!("default/{}",key );
-            let default_res = get_key_value(&default_path);
+            let default_path = format!("default/{}", key);
+            let default_res = get_key_value(&default_path, &http_client);
             match default_res {
-                Ok( s) =>  println!("{}",  s),
-                Err(_)=> println!("null")
+                Ok(s) => println!("{}", s),
+                Err(_) => println!("null")
             }
         }
     }
