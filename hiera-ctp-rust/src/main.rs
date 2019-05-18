@@ -1,6 +1,7 @@
 extern crate reqwest;
 extern crate serde_json;
 extern crate base64;
+extern crate state;
 
 mod err;
 
@@ -10,15 +11,14 @@ use serde_json::Value;
 use base64::decode;
 use err::CTPError;
 use reqwest::Client;
+use state::Storage;
 
 
-fn get_key_value(path: &String, http_client: &Client) -> Result<String, CTPError> {
-//    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
-    let mut url: String = "http://localhost:8500/v1/kv/".to_owned();
-    url.push_str(path);
-//    let mut res = reqwest::get(&url)?;
+static HTTP_CLIENT: Storage<Client> = Storage::new();
 
-    let mut res = http_client.get(&url).send()?;
+fn get_key_value(path: &String) -> Result<String, CTPError> {
+    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
+    let mut res = HTTP_CLIENT.get().get(&url).send()?;
     if res.status() == 200 {
         let mut body = String::new();
         res.read_to_string(&mut body)?;
@@ -38,7 +38,7 @@ fn get_key_value(path: &String, http_client: &Client) -> Result<String, CTPError
 }
 
 
-fn find_key_value(key: &String, path_parts: &[String], http_client: &Client) -> Option<String> {
+fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
     let mut parts = path_parts.to_vec();
     parts.reverse();
     let mut res: Option<String> = None;
@@ -47,7 +47,7 @@ fn find_key_value(key: &String, path_parts: &[String], http_client: &Client) -> 
         if res.is_none() {
             let (head, _tail) = parts.split_at(length - x);
             let path = format!("{}/{}", head.join("/"), key);
-            let r = get_key_value(&path, http_client);
+            let r = get_key_value(&path);
             match r {
                 Ok(x) => {
                     res = Some(x)
@@ -60,18 +60,18 @@ fn find_key_value(key: &String, path_parts: &[String], http_client: &Client) -> 
 }
 
 fn main() {
-    let http_client: Client = Client::builder().build().expect("expect client");
+    HTTP_CLIENT.set( Client::builder().build().expect("expect client") );
     let args: Vec<String> = env::args().collect();
     let (left, path_parts) = args.split_at(2);
     let key = left.get(1).unwrap();
-    let res = find_key_value(&key, &path_parts, &http_client);
+    let res = find_key_value(&key, &path_parts);
     match res {
         Some(data) => {
             println!("{}", data)
         }
         None => {
             let default_path = format!("default/{}", key);
-            let default_res = get_key_value(&default_path, &http_client);
+            let default_res = get_key_value(&default_path);
             match default_res {
                 Ok(s) => println!("{}", s),
                 Err(_) => println!("null")
