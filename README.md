@@ -43,9 +43,16 @@ Just for experiment this utility is implemented in Java, Rust, and Go
 It is possible to build just individual implementation by navigating to *[project root]*/hiera-ctp-*[lang]*
  and running ./build.sh
 
-**Note**: Java version requires Java 11 
+**Note**: Java version requires Java 11
+**Graal-Native**: requires GraalVM with native image support
+
+Before building it is necessary to set j11 and Graal homes as
+
+	export JAVA11_HOME=<location>
+    export GRAAL_HOME=<location>
+
  
-Or build them all 
+Build them all 
 
 	cd <project root>
 	# make sure that Java 11 is used
