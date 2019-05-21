@@ -32,15 +32,15 @@ public class HieraPlugin {
     }
     
 
-    //  this works faster than method with fluent HTTP that tests for return code before attempting to parse
+
     public static Result get_key_value(String path) {
-        try {
+        try { //works faster than testing for return code before attempting to parse
             JsonNode tree = om.readTree(new URL("http://localhost:8500/v1/kv/" + path));
             String  b64v = tree.get(0).get("Value").asText();
             String val = new String(Base64.getDecoder().decode(b64v));
             return new Result(val, 200);
         } catch (IOException e) {
-            //            e.printStackTrace();
+            //e.printStackTrace();
         }
         return new Result("42", -1);
     }
@@ -68,8 +68,7 @@ public class HieraPlugin {
                 res = get_key_value_or_null(path);
             }
         }
-        if (res == null) {
-//            lets try to find a default
+        if (res == null) { // lets try to find a default
             res = get_key_value_or_null("default/" + key);
         }
         return new Result(res, 200);
