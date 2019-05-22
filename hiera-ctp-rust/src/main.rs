@@ -39,7 +39,7 @@ fn get_key_value(path: &String) -> Result<String, CTPError> {
     let url: String = format!("{}/v1/kv/{}", cconn.base_url, path);
     let mut request_builder = cconn.http_client.get(&url);
     if cconn.token.len() != 0 {
-        request_builder = request_builder.header("CONSUL_HTTP_TOKEN", cconn.token.to_string());
+        request_builder = request_builder.header("X-Consul-Token", cconn.token.to_string());
     }
     let mut res = request_builder.send()?;
     if res.status() == 200 {
