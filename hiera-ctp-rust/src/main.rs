@@ -1,4 +1,7 @@
 extern crate reqwest;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde;
 extern crate serde_json;
 extern crate base64;
 extern crate state;
@@ -7,25 +10,45 @@ mod err;
 
 use std::io::Read;
 use std::env;
-use serde_json::Value;
+//use serde_json::Value;
+//use serde::Deserialize;
 use base64::decode;
 use err::CTPError;
 use reqwest::Client;
 use state::Storage;
 
 
-static HTTP_CLIENT: Storage<Client> = Storage::new();
+struct ConsulConnectionState {
+    http_client: Client,
+    base_url: String,
+    token: String,
+}
+
+static CONSUL_CONN: Storage<ConsulConnectionState> = Storage::new();
+
+#[allow(non_snake_case)]
+#[derive(Debug, Deserialize)]
+struct KeyData {
+    Key: String,
+    Value: String,
+}
+
 
 fn get_key_value(path: &String) -> Result<String, CTPError> {
-    let url: String = format!("http://localhost:8500/v1/kv/{}", path);
-    let mut res = HTTP_CLIENT.get().get(&url).send()?;
+    let cconn = CONSUL_CONN.get();
+    let url: String = format!("{}/v1/kv/{}", cconn.base_url, path);
+    let mut request_builder = cconn.http_client.get(&url);
+    if cconn.token.len() != 0 {
+        request_builder = request_builder.header("CONSUL_HTTP_TOKEN", cconn.token.to_string());
+    }
+    let mut res = request_builder.send()?;
     if res.status() == 200 {
         let mut body = String::new();
         res.read_to_string(&mut body)?;
-        let r: Result<Value, serde_json::Error> = serde_json::from_str(&body);
+        let r: Result<Vec<KeyData>, serde_json::Error> = serde_json::from_str(&body);
         match r {
             Ok(v) => {
-                let b64v = v[0]["Value"].as_str().unwrap();
+                let b64v = v[0].Value.as_str();
                 let vd = decode(b64v).unwrap();
                 let s = String::from_utf8(vd).unwrap();
                 Ok(s)
@@ -60,7 +83,24 @@ fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
 }
 
 fn main() {
-    HTTP_CLIENT.set( Client::builder().build().expect("expect client") );
+    let httpc = Client::builder().build().expect("expect client");
+    let base = match env::var("CONSUL_HTTP_ADDR") {
+        Ok(v) => v,
+        Err(_) => "http://localhost:8500".to_string()
+    };
+    let t = match env::var("CONSUL_HTTP_TOKEN") {
+            Ok(v) => v,
+            Err(_) => "".to_string()
+        };
+
+    let ccon = ConsulConnectionState {
+        http_client: httpc,
+        base_url: base,
+        token: t,
+    };
+
+
+    CONSUL_CONN.set(ccon);
     let args: Vec<String> = env::args().collect();
     let (left, path_parts) = args.split_at(2);
     let key = left.get(1).unwrap();
