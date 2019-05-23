@@ -50,7 +50,14 @@ Before building it is necessary to set j11 and Graal homes as
 
 	export JAVA11_HOME=<location>
     export GRAAL_HOME=<location>
+    
+    
+Install native-image component to Graal
 
+    gu install native-image
+        
+
+Install Rust and setup **nightly** channel as toolchain
  
 Build them all 
 
