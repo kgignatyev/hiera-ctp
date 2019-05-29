@@ -101,16 +101,18 @@ Performance
 
 Rust implementation  is the fastest, GO is close second, and Java is much much slower,
 and Java implementation consumes about 100 times(!) more CPU resources than other
-implementations
+implementations. But! When Java code (downgraded to Java 8) 
+compiled with Graal VM then Java outperforms Rust implementation!
 
 ![performance](docs/performance.png)
 	
-![performance](docs/performance-2.png)
 
 
 
 Limitations
 ---
 
-Currently requires Consul agent accessible at http://localhost:8500 	
+Currently requires Consul agent accessible at http://localhost:8500
+Rust implementation supports CONSUL_HTTP_ADDR and CONSUL_HTTP_TOKEN 
+environment variables	
 	
