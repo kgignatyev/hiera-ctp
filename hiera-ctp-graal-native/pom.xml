@@ -15,7 +15,7 @@
         <!--<assertj-core.version>3.3.0</assertj-core.version>-->
         <build.version>0.1-SNAPSHOT</build.version>
         <fluent-hc.version>4.5.8</fluent-hc.version>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
     </properties>
 
 
