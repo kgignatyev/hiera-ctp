@@ -8,14 +8,14 @@
     <version>${build.version}</version>
 
     <prerequisites>
-        <maven>3.6.1</maven>
+        <maven>3.9.0</maven>
     </prerequisites>
 
     <properties>
         <!--<assertj-core.version>3.3.0</assertj-core.version>-->
         <build.version>0.1-SNAPSHOT</build.version>
-        <fluent-hc.version>4.5.8</fluent-hc.version>
-        <jackson.version>2.9.8</jackson.version>
+        <fluent-hc.version>4.5.14</fluent-hc.version>
+        <jackson.version>2.17.0</jackson.version>
     </properties>
 
 

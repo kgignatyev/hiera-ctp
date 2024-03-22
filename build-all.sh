@@ -2,24 +2,14 @@
 
 set -e
 
-cd  hiera-ctp-rust
+if test -f build_times.txt;then
+    rm build_times.txt
+fi
 
-./build.sh
-
-
-cd ../hiera-ctp-java
-source ../j11.sh
-./build.sh
-
-cd ../hiera-ctp-graal-native
-source ../gvm.sh
-./build.sh
-
-
-
-cd ../hiera-ctp-go
-
-./build.sh
-
-
-cd ..
+for d in hiera-ctp-rust hiera-ctp-java hiera-ctp-graal-native hiera-ctp-go hiera-ctp-kotlin-native;do
+    cd $d
+    echo "Building $d" >> ../build_times.txt
+    command time -a -o ../build_times.txt  ./build.sh
+    pwd
+    cd ..
+done

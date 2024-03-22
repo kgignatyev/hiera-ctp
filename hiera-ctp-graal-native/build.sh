@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+source ../gvm.sh
 
 mvn clean install
 native-image --report-unsupported-elements-at-runtime \

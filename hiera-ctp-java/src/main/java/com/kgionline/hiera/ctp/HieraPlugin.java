@@ -32,26 +32,6 @@ public class HieraPlugin {
 
     }
 
-//  this works slower than method with Jackson pulling data directly
-//    public static Result get_key_value(String path) {
-//        try {
-//            Response rsp = Request.Get("http://localhost:8500/v1/kv/" + path).execute();
-//            ResponseHandler<Result> h = httpResponse -> {
-//                int statusCode = httpResponse.getStatusLine().getStatusCode();
-//                if (statusCode == 200) {
-//                    ContentResponseHandler rh = new ContentResponseHandler();
-//                    var tree = om.readTree(rh.handleResponse( httpResponse).asStream());
-//                    var b64v = tree.get(0).get("Value").asText();
-//                    return new Result( new String(Base64.getDecoder().decode(b64v)), statusCode);
-//                }
-//                return new Result( null,statusCode);
-//            };
-//            return  rsp.handleResponse(h);
-//        } catch (IOException e) {
-////            e.printStackTrace();
-//        }
-//        return new Result("42", -1);
-//    }
 
     //  this works faster than method with fluent HTTP that tests for return code before attempting to parse
     public static Result get_key_value(String path) {

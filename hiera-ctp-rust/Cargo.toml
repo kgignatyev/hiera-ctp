@@ -11,10 +11,10 @@ derive=["serde/derive"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = "0.9.16"
-serde_json = "1.0.39"
-serde_derive = "1.0.91"
-serde = "1.0.91"
-base64 = "0.10.1"
-state = "0.2"
+reqwest = { version ="0.12.0" , features = ["blocking"]}
+serde_json = "1.0.114"
+serde_derive = "1.0.197"
+serde = "1.0.197"
+base64 = "0.22.0"
+state = "0.6.0"
 

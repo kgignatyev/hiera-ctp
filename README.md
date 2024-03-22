@@ -34,11 +34,24 @@ if we set environment variable CLUSTER_LOCATION to us-east-2 we get different va
 	
 	v=postgresql://east-myapp/db-r1	 
 
+Running Consul
+---
+
+```bash
+cd helpers
+./run-local-consul.sh
+```
+
+and in a separate terminal
+
+```bash 
+./set-sample-data.sh
+```
 
 Building
 ---
 
-Just for experiment this utility is implemented in Java, Rust, and Go
+Just for experiment this utility is implemented in Java, Rust, Go, and Kotlin Native
 
 It is possible to build just individual implementation by navigating to *[project root]*/hiera-ctp-*[lang]*
  and running ./build.sh

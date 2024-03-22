@@ -1,0 +1,384 @@
+***************
+JAVA-_us-west-1_release1
+        2.00 real         4.51 user         0.27 sys
+           108445696  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               65365  page reclaims
+                  32  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                   9  signals received
+                  65  voluntary context switches
+               15492  involuntary context switches
+            76614803  instructions retired
+            51626169  cycles elapsed
+             8717888  peak memory footprint
+RUST-_us-west-1_release1
+        0.07 real         0.02 user         0.02 sys
+            16400384  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6531  page reclaims
+                  48  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                   8  signals received
+                  45  voluntary context switches
+                 840  involuntary context switches
+            71526815  instructions retired
+            39940657  cycles elapsed
+             8603264  peak memory footprint
+GO-_us-west-1_release1
+        0.06 real         0.02 user         0.02 sys
+            16121856  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                7848  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                  10  signals received
+                  45  voluntary context switches
+                1331  involuntary context switches
+            71251456  instructions retired
+            39883081  cycles elapsed
+             8308288  peak memory footprint
+JAVA-NATIVE-_us-west-1_release1
+        0.10 real         0.03 user         0.03 sys
+            18743296  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               11117  page reclaims
+                1720  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                   8  signals received
+                  73  voluntary context switches
+                 899  involuntary context switches
+            73171838  instructions retired
+            42782139  cycles elapsed
+             7898560  peak memory footprint
+KOTLIN-NATIVE-_us-west-1_release1
+        0.08 real         0.03 user         0.03 sys
+            16023552  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                8609  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 165  messages sent
+                 165  messages received
+                   9  signals received
+                 198  voluntary context switches
+                1175  involuntary context switches
+            72239734  instructions retired
+            40015344  cycles elapsed
+             8193536  peak memory footprint
+***************
+JAVA-_us-east-2_release1
+        1.98 real         4.57 user         0.27 sys
+           107626496  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               66664  page reclaims
+                  32  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  91  messages sent
+                  91  messages received
+                  11  signals received
+                  63  voluntary context switches
+               15788  involuntary context switches
+            76844631  instructions retired
+            49109472  cycles elapsed
+             8291904  peak memory footprint
+RUST-_us-east-2_release1
+        0.07 real         0.02 user         0.02 sys
+            15745024  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6495  page reclaims
+                  48  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  91  messages sent
+                  91  messages received
+                   9  signals received
+                  45  voluntary context switches
+                 828  involuntary context switches
+            71508653  instructions retired
+            39289406  cycles elapsed
+             7947776  peak memory footprint
+GO-_us-east-2_release1
+        0.06 real         0.02 user         0.02 sys
+            15974400  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                7849  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  91  messages sent
+                  91  messages received
+                   9  signals received
+                  46  voluntary context switches
+                1232  involuntary context switches
+            71540147  instructions retired
+            40470429  cycles elapsed
+             8193600  peak memory footprint
+JAVA-NATIVE-_us-east-2_release1
+        0.10 real         0.03 user         0.03 sys
+            18710528  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               11140  page reclaims
+                1720  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  91  messages sent
+                  91  messages received
+                  10  signals received
+                  72  voluntary context switches
+                 777  involuntary context switches
+            72259266  instructions retired
+            40773991  cycles elapsed
+             8472064  peak memory footprint
+KOTLIN-NATIVE-_us-east-2_release1
+        0.08 real         0.03 user         0.03 sys
+            16072704  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                8611  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 151  messages sent
+                 151  messages received
+                   8  signals received
+                 181  voluntary context switches
+                1204  involuntary context switches
+            72985186  instructions retired
+            40680281  cycles elapsed
+             8226304  peak memory footprint
+***************
+JAVA-_us-east-2_release2
+        1.99 real         4.55 user         0.27 sys
+           107397120  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               65428  page reclaims
+                  32  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                  11  signals received
+                  65  voluntary context switches
+               16195  involuntary context switches
+            76803131  instructions retired
+            49295693  cycles elapsed
+             8406592  peak memory footprint
+RUST-_us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+            16433152  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6474  page reclaims
+                  48  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                   8  signals received
+                  45  voluntary context switches
+                 840  involuntary context switches
+            72381617  instructions retired
+            41574076  cycles elapsed
+             8603264  peak memory footprint
+GO-_us-east-2_release2
+        0.06 real         0.02 user         0.02 sys
+            16039936  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                7826  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                   8  signals received
+                  46  voluntary context switches
+                1340  involuntary context switches
+            72960696  instructions retired
+            41246916  cycles elapsed
+             8242752  peak memory footprint
+JAVA-NATIVE-_us-east-2_release2
+        0.10 real         0.03 user         0.03 sys
+            18956288  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               11163  page reclaims
+                1720  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  93  messages sent
+                  93  messages received
+                  10  signals received
+                  73  voluntary context switches
+                 871  involuntary context switches
+            73643898  instructions retired
+            41352552  cycles elapsed
+             8373760  peak memory footprint
+KOTLIN-NATIVE-_us-east-2_release2
+        0.08 real         0.03 user         0.03 sys
+            16285696  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                8639  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 165  messages sent
+                 165  messages received
+                   8  signals received
+                 196  voluntary context switches
+                1101  involuntary context switches
+            72064116  instructions retired
+            39697038  cycles elapsed
+             8504960  peak memory footprint
+***************
+JAVA-prod_us-east-2_release2
+        1.98 real         4.59 user         0.27 sys
+           109117440  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               66971  page reclaims
+                  32  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 105  messages sent
+                 105  messages received
+                   8  signals received
+                  77  voluntary context switches
+               15862  involuntary context switches
+            76887365  instructions retired
+            48144096  cycles elapsed
+             8275456  peak memory footprint
+RUST-prod_us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+            16285696  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6527  page reclaims
+                  48  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 105  messages sent
+                 105  messages received
+                   8  signals received
+                  45  voluntary context switches
+                 976  involuntary context switches
+            73990024  instructions retired
+            44128841  cycles elapsed
+             8422912  peak memory footprint
+GO-prod_us-east-2_release2
+        0.06 real         0.02 user         0.02 sys
+            16039936  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                7764  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 105  messages sent
+                 105  messages received
+                   8  signals received
+                  45  voluntary context switches
+                1279  involuntary context switches
+            72022333  instructions retired
+            40284848  cycles elapsed
+             8259136  peak memory footprint
+JAVA-NATIVE-prod_us-east-2_release2
+        0.10 real         0.03 user         0.03 sys
+            18989056  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               11194  page reclaims
+                1720  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 105  messages sent
+                 105  messages received
+                   8  signals received
+                  85  voluntary context switches
+                 873  involuntary context switches
+            74176759  instructions retired
+            42481729  cycles elapsed
+             8177216  peak memory footprint
+KOTLIN-NATIVE-prod_us-east-2_release2
+        0.09 real         0.03 user         0.03 sys
+            16171008  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                8763  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                 249  messages sent
+                 249  messages received
+                   8  signals received
+                 293  voluntary context switches
+                1332  involuntary context switches
+            73645847  instructions retired
+            42811331  cycles elapsed
+             8357312  peak memory footprint

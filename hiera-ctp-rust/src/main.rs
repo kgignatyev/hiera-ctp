@@ -14,8 +14,8 @@ use std::env;
 //use serde::Deserialize;
 use base64::decode;
 use err::CTPError;
-use reqwest::Client;
-use state::Storage;
+use reqwest::blocking::Client;
+use state::InitCell;
 
 
 struct ConsulConnectionState {
@@ -24,7 +24,7 @@ struct ConsulConnectionState {
     token: String,
 }
 
-static CONSUL_CONN: Storage<ConsulConnectionState> = Storage::new();
+static CONSUL_CONN: InitCell<ConsulConnectionState> = InitCell::new();
 
 #[allow(non_snake_case)]
 #[derive(Debug, Deserialize)]
@@ -37,11 +37,12 @@ struct KeyData {
 fn get_key_value(path: &String) -> Result<String, CTPError> {
     let cconn = CONSUL_CONN.get();
     let url: String = format!("{}/v1/kv/{}", cconn.base_url, path);
-    let mut request_builder = cconn.http_client.get(&url);
+    let mut request_builder =  cconn.http_client.get(&url);
     if cconn.token.len() != 0 {
         request_builder = request_builder.header("X-Consul-Token", cconn.token.to_string());
     }
-    let mut res = request_builder.send()?;
+    let mut res = request_builder.send().unwrap();
+
     if res.status() == 200 {
         let mut body = String::new();
         res.read_to_string(&mut body)?;
@@ -83,15 +84,9 @@ fn find_key_value(key: &String, path_parts: &[String]) -> Option<String> {
 }
 
 fn main() {
-    let httpc = Client::builder().build().expect("expect client");
-    let base = match env::var("CONSUL_HTTP_ADDR") {
-        Ok(v) => v,
-        Err(_) => "http://localhost:8500".to_string()
-    };
-    let t = match env::var("CONSUL_HTTP_TOKEN") {
-            Ok(v) => v,
-            Err(_) => "".to_string()
-        };
+    let httpc = Client::new();
+    let base = env::var("CONSUL_HTTP_ADDR").unwrap_or_else(|_| "http://localhost:8500".to_string());
+    let t = env::var("CONSUL_HTTP_TOKEN").unwrap_or_else(|_| "".to_string());
 
     let ccon = ConsulConnectionState {
         http_client: httpc,

@@ -1,0 +1,10 @@
+Building hiera-ctp-rust
+        0.94 real         0.17 user         0.12 sys
+Building hiera-ctp-java
+        1.89 real         4.92 user         0.29 sys
+Building hiera-ctp-graal-native
+       40.09 real       270.28 user         5.78 sys
+Building hiera-ctp-go
+        0.91 real         0.78 user         0.62 sys
+Building hiera-ctp-kotlin-native
+       31.90 real         0.70 user         0.08 sys

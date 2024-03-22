@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-export JAVA_HOME=$GRAAL_HOME;
-export PATH=$GRAAL_HOME/bin:$PATH
+export JAVA_HOME=$HOME/.sdkman/candidates/java/21.0.2-graal;
+export PATH=$JAVA_HOME/bin:$PATH

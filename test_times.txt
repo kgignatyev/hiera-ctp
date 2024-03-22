@@ -1,0 +1,44 @@
+***************
+JAVA__us-west-1_release1
+        2.01 real         3.56 user         0.24 sys
+RUST__us-west-1_release1
+        0.07 real         0.01 user         0.02 sys
+GO__us-west-1_release1
+        0.08 real         0.02 user         0.02 sys
+JAVA-NATIVE__us-west-1_release1
+        0.15 real         0.03 user         0.04 sys
+KOTLIN-NATIVE__us-west-1_release1
+        0.09 real         0.03 user         0.03 sys
+***************
+JAVA__us-east-2_release1
+        1.96 real         3.51 user         0.23 sys
+RUST__us-east-2_release1
+        0.07 real         0.02 user         0.02 sys
+GO__us-east-2_release1
+        0.06 real         0.02 user         0.02 sys
+JAVA-NATIVE__us-east-2_release1
+        0.10 real         0.03 user         0.03 sys
+KOTLIN-NATIVE__us-east-2_release1
+        0.08 real         0.03 user         0.03 sys
+***************
+JAVA__us-east-2_release2
+        1.95 real         3.54 user         0.22 sys
+RUST__us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+GO__us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+JAVA-NATIVE__us-east-2_release2
+        0.10 real         0.03 user         0.03 sys
+KOTLIN-NATIVE__us-east-2_release2
+        0.08 real         0.03 user         0.03 sys
+***************
+JAVA_prod_us-east-2_release2
+        1.96 real         3.54 user         0.22 sys
+RUST_prod_us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+GO_prod_us-east-2_release2
+        0.07 real         0.02 user         0.02 sys
+JAVA-NATIVE_prod_us-east-2_release2
+        0.10 real         0.03 user         0.03 sys
+KOTLIN-NATIVE_prod_us-east-2_release2
+        0.09 real         0.03 user         0.03 sys
