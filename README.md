@@ -56,12 +56,12 @@ Just for experiment this utility is implemented in Java, Rust, Go, and Kotlin Na
 It is possible to build just individual implementation by navigating to *[project root]*/hiera-ctp-*[lang]*
  and running ./build.sh
 
-**Note**: Java version requires Java 11
+**Note**: Java version requires Java 21
 **Graal-Native**: requires GraalVM with native image support
 
-Before building it is necessary to set j11 and Graal homes as
+Before building it is necessary to set j21 and Graal homes as
 
-	export JAVA11_HOME=<location>
+	export JAVA21_HOME=<location>
     export GRAAL_HOME=<location>
     
     
@@ -70,7 +70,7 @@ Install native-image component to Graal
     gu install native-image
         
 
-Install Rust and setup **nightly** channel as toolchain
+Install Rust
  
 Build them all 
 
@@ -112,18 +112,19 @@ Or it can be invoked in a language specific development way, for example for Rus
 Performance
 ---
 
-Rust implementation  is the fastest, GO is close second, and Java is much much slower,
-and Java implementation consumes about 100 times(!) more CPU resources than other
-implementations
+In 2019 Rust implementation  was the fastest, GO was close second, and Java was much slower.
+But Java compiled with GraalVM native-image was the fastest!
 
-![performance](docs/performance.png)
-	
-![performance](docs/performance-2.png)
+In 2024 Rust and Go are the fastest, but Kotlin Native outperforms Java compiled with GraalVM native-image
+
+![2024performance](docs/2024-results.png)
+
+
 
 
 
 Limitations
 ---
 
-Currently requires Consul agent accessible at http://localhost:8500 	
+Currently, requires Consul agent accessible at http://localhost:8500 	
 	

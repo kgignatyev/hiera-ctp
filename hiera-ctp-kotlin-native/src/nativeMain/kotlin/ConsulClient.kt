@@ -57,13 +57,11 @@ class ConsulClient {
 
         return if (resp.status == HttpStatusCode.OK) {
             val responseText = resp.bodyAsText()
-//            println("$urlString  -> $responseText")
             val jsonE = Json.parseToJsonElement( responseText )
             val encodedVal = jsonE.jsonArray[0].jsonObject["Value"]!!.jsonPrimitive.content
             val decodedVal = Base64.decode( encodedVal ).decodeToString()
             Result(decodedVal, 200)
         } else {
-//            println("$urlString  -> $resp")
             Result("42", -1)
         }
     }
